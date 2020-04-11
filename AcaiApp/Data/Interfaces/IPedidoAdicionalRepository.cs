@@ -10,6 +10,6 @@ namespace AcaiApp.Data.Interfaces
     {
         PedidoAdicional ObterPedidoAdicionalPorId(int id);
         IEnumerable<PedidoAdicional> ObterTodosPedidosAdicionais();
-        public bool PedidoAdicionalExiste(int id);
+        public bool PedidoAdicionalExiste(long id);
     }
 }

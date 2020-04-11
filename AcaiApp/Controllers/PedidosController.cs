@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AcaiApp.Data.Context;
 using AcaiApp.Domain.Entities;
 using AcaiApp.Services.Interfaces;
+using AcaiApp.Domain.DTOs;
 
 namespace AcaiApp.Controllers
 {
@@ -15,33 +16,37 @@ namespace AcaiApp.Controllers
     [ApiController]
     public class PedidosController : ControllerBase
     {
-        private readonly IPedidoService service;
+        private readonly IPedidoService _pedidoService;
+        private readonly IResumoPedidoService _resumoPedidoService;
 
-        public PedidosController(IPedidoService service)
+        public PedidosController(IPedidoService service, IResumoPedidoService resumoPedidoService)
         {
-            this.service = service;
+            _pedidoService = service;
+            _resumoPedidoService = resumoPedidoService;
         }
 
         // GET: api/Pedidoes
         [HttpGet]
         public ActionResult<IEnumerable<Pedido>> GetPedidos()
         {
-            return service.ObterTodosPedidos().ToList();
+            return _pedidoService.ObterTodosPedidos().ToList();
             
         }
 
         // GET: api/Pedidoes/5
         [HttpGet("{id}")]
-        public ActionResult<Pedido> GetPedido(int id)
+        public ActionResult<ResumoPedido> GetPedido(int id)
         {
-            var pedido = service.ObterPedidoPorId(id);
+            var pedido = _pedidoService.ObterPedidoPorId(id);
 
             if (pedido == null)
             {
                 return NotFound();
             }
 
-            return pedido;
+            var resumo = _resumoPedidoService.resumoPedido(pedido);
+
+            return resumo;
         }
 
         // PUT: api/Pedidoes/5
@@ -57,7 +62,7 @@ namespace AcaiApp.Controllers
 
             try
             {
-                service.AtualizarPedido(pedido);
+                _pedidoService.AtualizarPedido(pedido);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -80,7 +85,7 @@ namespace AcaiApp.Controllers
         [HttpPost]
         public ActionResult<Pedido> PostPedido(Pedido pedido)
         {
-            service.CriarPedido(pedido);
+            _pedidoService.CriarPedido(pedido);
 
             return CreatedAtAction("GetPedido", new { id = pedido.Id }, pedido);
         }
@@ -89,20 +94,20 @@ namespace AcaiApp.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Pedido> DeletePedido(int id)
         {
-            var pedido = service.ObterPedidoPorId(id);
+            var pedido = _pedidoService.ObterPedidoPorId(id);
             if (pedido == null)
             {
                 return NotFound();
             }
 
-            service.ExcluirPedido(id);
+            _pedidoService.ExcluirPedido(id);
 
             return pedido;
         }
 
         private bool PedidoExists(int id)
         {
-            return service.PedidoExiste(id);
+            return _pedidoService.PedidoExiste(id);
         }
     }
 }

@@ -7,8 +7,8 @@ namespace AcaiApp.Domain.Entities
 {
     public class PedidoAdicional : BaseEntity
     {
-        public int IdAdicional { get; set; }
+        public long IdAdicional { get; set; }
         public Pedido Pedido { get; set; }
-        public Adicional Adicional { get; set; }
+        public IEnumerable<Adicional> Adicional { get; set; }
     }
 }

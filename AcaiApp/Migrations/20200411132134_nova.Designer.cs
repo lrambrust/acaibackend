@@ -3,14 +3,16 @@ using System;
 using AcaiApp.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcaiApp.Migrations
 {
     [DbContext(typeof(AcaiContext))]
-    partial class AcaiContextModelSnapshot : ModelSnapshot
+    [Migration("20200411132134_nova")]
+    partial class nova
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,12 +30,6 @@ namespace AcaiApp.Migrations
                         .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
                         .HasMaxLength(50);
 
-                    b.Property<long?>("PedidoAdicionalId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("PedidoAdicionalIdAdicional")
-                        .HasColumnType("bigint");
-
                     b.Property<long?>("PedidoId")
                         .HasColumnType("bigint");
 
@@ -46,8 +42,6 @@ namespace AcaiApp.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PedidoId");
-
-                    b.HasIndex("PedidoAdicionalIdAdicional", "PedidoAdicionalId");
 
                     b.ToTable("Adicional");
                 });
@@ -74,16 +68,21 @@ namespace AcaiApp.Migrations
 
             modelBuilder.Entity("AcaiApp.Domain.Entities.PedidoAdicional", b =>
                 {
-                    b.Property<long>("IdAdicional")
-                        .HasColumnType("bigint");
+                    b.Property<int>("IdAdicional")
+                        .HasColumnType("int");
 
                     b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("AdicionalId")
                         .HasColumnType("bigint");
 
                     b.Property<long?>("PedidoId")
                         .HasColumnType("bigint");
 
                     b.HasKey("IdAdicional", "Id");
+
+                    b.HasIndex("AdicionalId");
 
                     b.HasIndex("PedidoId");
 
@@ -95,14 +94,14 @@ namespace AcaiApp.Migrations
                     b.HasOne("AcaiApp.Domain.Entities.Pedido", null)
                         .WithMany("Adicional")
                         .HasForeignKey("PedidoId");
-
-                    b.HasOne("AcaiApp.Domain.Entities.PedidoAdicional", null)
-                        .WithMany("Adicional")
-                        .HasForeignKey("PedidoAdicionalIdAdicional", "PedidoAdicionalId");
                 });
 
             modelBuilder.Entity("AcaiApp.Domain.Entities.PedidoAdicional", b =>
                 {
+                    b.HasOne("AcaiApp.Domain.Entities.Adicional", "Adicional")
+                        .WithMany()
+                        .HasForeignKey("AdicionalId");
+
                     b.HasOne("AcaiApp.Domain.Entities.Pedido", "Pedido")
                         .WithMany("PedidoAdicional")
                         .HasForeignKey("PedidoId");

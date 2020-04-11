@@ -41,6 +41,7 @@ namespace AcaiApp
             services.AddScoped<IAdicionalService, AdicionalService>();
             services.AddScoped<ICalculosService, CalculosService>();
             services.AddScoped<IPedidoAdicionalService, PedidoAdicionalService>();
+            services.AddScoped<IResumoPedidoService, ResumoPedidoService>();
 
             services.AddScoped<IAdicionalRepository, AdicionalRepository>();
             services.AddScoped<IPedidoAdicionalRepository, PedidoAdicionalRepository>();

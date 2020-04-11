@@ -43,6 +43,7 @@ namespace AcaiApp.Data.Context
             builder.Entity<Adicional>().Property(p => p.Id).IsRequired();
             builder.Entity<Adicional>().Property(p => p.TempoPreparo).IsRequired();
             builder.Entity<Adicional>().Property(p => p.ValorAdicional).HasColumnType("decimal(5,3)").IsRequired();
+            builder.Entity<Adicional>().Property(p => p.Descricao).IsRequired().HasMaxLength(50);
         }
 
         private void ModelBuilderPedidoAdicional(ModelBuilder builder)
@@ -51,6 +52,7 @@ namespace AcaiApp.Data.Context
             builder.Entity<PedidoAdicional>().HasKey(p => new { p.IdAdicional, p.Id });
             builder.Entity<PedidoAdicional>().Property(p => p.IdAdicional).IsRequired();
             builder.Entity<PedidoAdicional>().Property(p => p.Id).IsRequired();
+            
         }
     }
 }

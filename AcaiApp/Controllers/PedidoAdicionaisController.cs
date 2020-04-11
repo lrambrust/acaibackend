@@ -85,7 +85,7 @@ namespace AcaiApp.Controllers
             }
             catch (DbUpdateException)
             {
-                if (PedidoAdicionalExists(pedidoAdicional.IdAdicional))
+                if (PedidoAdicionalExists(pedidoAdicional.Id))
                 {
                     return Conflict();
                 }
@@ -113,7 +113,7 @@ namespace AcaiApp.Controllers
             return pedidoAdicional;
         }
 
-        private bool PedidoAdicionalExists(int id)
+        private bool PedidoAdicionalExists(long id)
         {
             return service.PedidoAdicionalExiste(id);
         }

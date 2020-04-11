@@ -24,7 +24,7 @@ namespace AcaiApp.Data.Repositories
             return _context.PedidosAdicionais.SingleOrDefault(p => p.Id == id);
         }
 
-        public bool PedidoAdicionalExiste(int id)
+        public bool PedidoAdicionalExiste(long id)
         {
             return _context.PedidosAdicionais.Any(p => p.Id == id);
         }

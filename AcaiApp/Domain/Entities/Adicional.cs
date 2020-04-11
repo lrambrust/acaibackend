@@ -7,8 +7,8 @@ namespace AcaiApp.Domain.Entities
 {
     public class Adicional : BaseEntity
     {
+        public string Descricao { get; set; }
         public int TempoPreparo { get; set; }
         public double ValorAdicional { get; set; }
-
     }
 }

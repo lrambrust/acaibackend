@@ -45,7 +45,7 @@ namespace AcaiApp.Services.Services
             return repository.ObterTodosPedidosAdicionais();
         }
 
-        public bool PedidoAdicionalExiste(int id)
+        public bool PedidoAdicionalExiste(long id)
         {
             return repository.PedidoAdicionalExiste(id);
         }

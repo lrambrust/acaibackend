@@ -3,14 +3,16 @@ using System;
 using AcaiApp.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AcaiApp.Migrations
 {
     [DbContext(typeof(AcaiContext))]
-    partial class AcaiContextModelSnapshot : ModelSnapshot
+    [Migration("20200411143333_correcaoCampos")]
+    partial class correcaoCampos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

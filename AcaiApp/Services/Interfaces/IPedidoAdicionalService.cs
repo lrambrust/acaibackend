@@ -13,6 +13,6 @@ namespace AcaiApp.Services.Interfaces
         PedidoAdicional ObterPedidoAdicionalPorId(int id);
         void ExcluirPedidoAdicional(int id);
         IEnumerable<PedidoAdicional> ObterTodosPedidosAdicionais();
-        bool PedidoAdicionalExiste(int id);
+        bool PedidoAdicionalExiste(long id);
     }
 }
